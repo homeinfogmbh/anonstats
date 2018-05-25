@@ -1,6 +1,7 @@
 """WSGI services."""
 
 from flask import request
+from werkzeug.local import LocalProxy
 
 from his import CUSTOMER, authenticated, authorized
 from timelib import strpdate
