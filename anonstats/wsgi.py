@@ -53,7 +53,9 @@ def list_():
     except ValueError:
         return ('Invalid date.', 400)
 
-    return JSON([stats.to_dict() for stats in _get_stats(start, end)])
+    return JSON([
+        anon_stats.to_dict(primary_key=False)
+        for anon_stats in _get_stats(start, end)])
 
 
 ROUTES = (('GET', '/', list_, 'list_stats'),)
