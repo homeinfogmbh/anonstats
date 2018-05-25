@@ -29,7 +29,10 @@ DOMAINS = LocalProxy(_get_domains)
 def _get_stats(start, end):
     """Returns the stats from start to end."""
 
-    expression = AnonStats.domain << DOMAINS
+    if CUSTOMER.root:
+        expression = True
+    else:
+        expression = AnonStats.host << DOMAINS
 
     if start is not None:
         expression &= AnonStats.timestamp >= start
