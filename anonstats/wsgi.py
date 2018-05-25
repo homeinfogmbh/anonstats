@@ -3,7 +3,7 @@
 from flask import request
 from werkzeug.local import LocalProxy
 
-from his import CUSTOMER, authenticated, authorized
+from his import ACCOUNT, CUSTOMER, authenticated, authorized
 from timelib import strpdate
 from wsgilib import Application, JSON
 
@@ -29,7 +29,7 @@ DOMAINS = LocalProxy(_get_domains)
 def _get_stats(start, end):
     """Returns the stats from start to end."""
 
-    if CUSTOMER.root:
+    if ACCOUNT.root:
         expression = True
     else:
         expression = AnonStats.host << DOMAINS
