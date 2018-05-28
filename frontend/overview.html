@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8"></meta>
+  <title>Website Statistiken: Übersicht</title>
+  <link rel="stylesheet" href="https://libraries.homeinfo.de/sweetalert/dist/sweetalert.css">
+  <script src="https://libraries.homeinfo.de/jquery/jquery-latest.min.js"></script>
+  <script src="https://libraries.homeinfo.de/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://javascript.homeinfo.de/his/his.js"></script>
+  <script src="js/dom.js"></script>
+  <script src="js/overview.js"></script>
+</head>
+<button onclick="anonstats.toggleRender();">Toggle rendering.</button>
+<br/>
+Von: <input id="from" type="date"> bis: <input id="until" type="date">
+<br/>
+<button onclick="anonstats.list();">Übernehmen.</button>
+<div id="list"></div>
