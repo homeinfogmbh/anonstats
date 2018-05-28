@@ -1,5 +1,7 @@
 """WSGI services."""
 
+from datetime import timedelta
+
 from flask import request
 from werkzeug.local import LocalProxy
 
@@ -38,7 +40,7 @@ def _get_stats(start, end):
         expression &= AnonStats.timestamp >= start
 
     if end is not None:
-        expression &= AnonStats.timestamp <= end
+        expression &= AnonStats.timestamp <= end + timedelta(days=1)
 
     return AnonStats.select().where(expression)
 
