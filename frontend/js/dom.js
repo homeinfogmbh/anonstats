@@ -87,14 +87,14 @@ anonstats.domainValue = function (stats) {
 
 anonstats.from = function (dates) {
     var element = document.createElement('td');
-    element.innerHTML = anonstats.minDate(dates);
+    element.innerHTML = anonstats.minDate(dates).toLocaleDateString('de-DE');
     return element;
 };
 
 
 anonstats.until = function (dates) {
     var element = document.createElement('td');
-    element.innerHTML = anonstats.maxDate(dates);
+    element.innerHTML = anonstats.maxDate(dates).toLocaleDateString('de-DE');
     return element;
 };
 
