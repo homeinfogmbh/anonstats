@@ -5,7 +5,7 @@ from datetime import datetime
 from peewee import PrimaryKeyField, ForeignKeyField, DateTimeField, CharField,\
     TextField
 
-from homeinfo.crm import Customer
+from mdb import Customer
 from peeweeplus import MySQLDatabase, JSONModel
 
 from anonstats.config import CONFIG
