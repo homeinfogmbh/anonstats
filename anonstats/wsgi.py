@@ -56,7 +56,7 @@ def list_():
         return ('Invalid date.', 400)
 
     return JSON([
-        anon_stats.to_dict(primary_key=False)
+        anon_stats.to_dict(autofields=False)
         for anon_stats in _get_stats(start, end)])
 
 
