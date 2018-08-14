@@ -2,7 +2,7 @@
 
 from datetime import datetime
 
-from peewee import PrimaryKeyField, ForeignKeyField, DateTimeField, CharField,\
+from peewee import AutoField, ForeignKeyField, DateTimeField, CharField, \
     TextField
 
 from mdb import Customer
@@ -21,7 +21,8 @@ class _AnonStatsModel(JSONModel):
         database = DATABASE
         schema = database.database
 
-    id = PrimaryKeyField()
+    id = AutoField()
+    JSON_FIELDS = {id: 'id'}
 
 
 class AnonStats(_AnonStatsModel):
@@ -30,6 +31,7 @@ class AnonStats(_AnonStatsModel):
     timestamp = DateTimeField(default=datetime.now)
     host = CharField(255)
     url = TextField()
+    JSON_FIELDS = {timestamp: 'timestamp', host: 'host', url: 'url'}
 
 
 class CustomerDomain(_AnonStatsModel):
@@ -37,3 +39,4 @@ class CustomerDomain(_AnonStatsModel):
 
     customer = ForeignKeyField(Customer, column_name='customer')
     domain = CharField(255)
+    JSON_FIELDS = {customer: 'customer', domain: 'domain'}
