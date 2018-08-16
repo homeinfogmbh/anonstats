@@ -2,11 +2,10 @@
 
 from datetime import datetime
 
-from peewee import AutoField, ForeignKeyField, DateTimeField, CharField, \
-    TextField
+from peewee import ForeignKeyField, DateTimeField, CharField, TextField
 
 from mdb import Customer
-from peeweeplus import MySQLDatabase, JSONModel, JSONField
+from peeweeplus import MySQLDatabase, JSONModel
 
 from anonstats.config import CONFIG
 
@@ -21,19 +20,17 @@ class _AnonStatsModel(JSONModel):
         database = DATABASE
         schema = database.database
 
-    id = JSONField(AutoField)
-
 
 class AnonStats(_AnonStatsModel):
     """Anonymous statistics entry."""
 
-    timestamp = JSONField(DateTimeField, default=datetime.now)
-    host = JSONField(CharField, 255)
-    url = JSONField(TextField)
+    timestamp = DateTimeField(default=datetime.now)
+    host = CharField(255)
+    url = TextField()
 
 
 class CustomerDomain(_AnonStatsModel):
     """Maps domains and customers."""
 
-    customer = JSONField(ForeignKeyField, Customer, column_name='customer')
-    domain = JSONField(CharField, 255)
+    customer = ForeignKeyField(Customer, column_name='customer')
+    domain = CharField(255)
