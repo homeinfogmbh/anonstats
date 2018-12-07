@@ -1,8 +1,9 @@
 """Configuration file parsing."""
 
-from configlib import INIParser
+from configlib import loadcfg
+
 
 __all__ = ['CONFIG']
 
 
-CONFIG = INIParser('/usr/local/etc/anonstats.conf')
+CONFIG = loadcfg('anonstats.conf')
