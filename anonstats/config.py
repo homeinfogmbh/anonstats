@@ -5,4 +5,4 @@ from configlib import INIParser
 __all__ = ['CONFIG']
 
 
-CONFIG = INIParser('/etc/anonstats.conf')
+CONFIG = INIParser('/usr/local/etc/anonstats.conf')

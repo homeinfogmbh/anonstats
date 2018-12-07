@@ -11,6 +11,7 @@ from wsgilib import Application, JSON
 
 from anonstats.orm import AnonStats, CustomerDomain
 
+
 __all__ = ['APPLICATION']
 
 

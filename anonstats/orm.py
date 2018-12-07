@@ -10,6 +10,9 @@ from peeweeplus import MySQLDatabase, JSONModel
 from anonstats.config import CONFIG
 
 
+__all__ = ['AnonStats', 'CustomerDomain']
+
+
 DATABASE = MySQLDatabase.from_config(CONFIG['db'])
 
 
