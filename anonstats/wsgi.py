@@ -3,7 +3,6 @@
 from datetime import timedelta
 
 from flask import request
-from werkzeug.local import LocalProxy
 
 from his import ACCOUNT, CUSTOMER, authenticated, authorized
 from timelib import strpdate
@@ -26,16 +25,14 @@ def _get_domains():
         yield customer_domain.domain
 
 
-DOMAINS = LocalProxy(_get_domains)
-
-
 def _get_stats(start, end):
     """Returns the stats from start to end."""
 
     if ACCOUNT.root:
         expression = True
     else:
-        expression = AnonStats.host << DOMAINS
+        domains = frozenset(_get_domains())
+        expression = AnonStats.host << domains
 
     if start is not None:
         expression &= AnonStats.timestamp >= start
