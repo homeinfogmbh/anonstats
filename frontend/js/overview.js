@@ -7,14 +7,14 @@ anonstats.GROUPED = true;
 
 
 anonstats._getArgs = function () {
-    var args = {};
-    var from = document.getElementById('from').value;
+    const args = {};
+    const from = document.getElementById('from').value;
 
     if (from) {
         args['start'] = from;
     }
 
-    var until = document.getElementById('until').value;
+    const until = document.getElementById('until').value;
 
     if (until) {
         args['end'] = until;
@@ -46,34 +46,33 @@ anonstats._render = function (json) {
 
 
 anonstats.render = function () {
-    var container = document.getElementById('#list');
+    const list = document.getElementById('#list');
     list.innerHTML = '';
 
     if (anonstats.GROUPED) {
-        var domains = anonstats.groupByDomain(anonstats.STATS);
+        const domains = anonstats.groupByDomain(anonstats.STATS);
         list.appendChild(anonstats.domainsEntry(domains));
     } else {
-        for (var i = 0; i < anonstats.STATS.length; i++) {
-            list.appendChild(anonstats.statisticsEntry(anonstats.STATS[i]));
+        for (let stats of anonstats.STATS) {
+            list.appendChild(anonstats.statisticsEntry(stats));
         }
     }
 };
 
 
 anonstats.groupByDomain = function (json) {
-    var grouped = {};
-    var domain;
+    const grouped = {};
 
     console.log('JSON: ' + JSON.stringify(json));
 
-    for (var i = 0; i < json.length; i++) {
-        domain = anonstats._extractDomain(json[i].host);
+    for (let domain of json) {
+        domain = anonstats._extractDomain(domain.host);
 
         if (grouped[domain] == null) {
             grouped[domain] = [];
         }
 
-        grouped[domain].push(json[i]);
+        grouped[domain].push(domain);
     }
 
     return grouped;
@@ -81,8 +80,8 @@ anonstats.groupByDomain = function (json) {
 
 
 anonstats._extractDomain = function (string) {
-    var elements = string.split('.');
-    var domain = elements.slice(elements.length - 2, elements.length);
+    const elements = string.split('.');
+    const domain = elements.slice(elements.length - 2, elements.length);
     return domain.join('.');
 };
 

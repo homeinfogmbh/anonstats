@@ -2,10 +2,10 @@
 
 var anonstats = anonstats || {};
 
-anonstats.login = function () {
-    var userName = document.getElementById('userName').value;
-    var password = document.getElementById('password').value;
 
+anonstats.login = function () {
+    const userName = document.getElementById('userName').value;
+    const password = document.getElementById('password').value;
     his.session.login(userName, password).then(anonstats._redirectIndex, anonstats._loginError);
 };
 
