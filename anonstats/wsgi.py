@@ -47,6 +47,7 @@ def _get_stats(start, end):
 @authorized('anonstats')
 def list_():
     """Lists statistics for the current customer."""
+
     try:
         start = strpdate(request.args.get('start'))
         end = strpdate(request.args.get('end'))
