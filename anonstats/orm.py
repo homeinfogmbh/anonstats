@@ -5,26 +5,24 @@ from datetime import datetime
 from peewee import ForeignKeyField, DateTimeField, CharField, TextField
 
 from mdb import Customer
-from peeweeplus import MySQLDatabase, JSONModel
-
-from anonstats.config import CONFIG
+from peeweeplus import JSONModel, MySQLDatabaseProxy
 
 
 __all__ = ['AnonStats', 'CustomerDomain']
 
 
-DATABASE = MySQLDatabase.from_config(CONFIG['db'])
+DATABASE = MySQLDatabaseProxy('anonstats')
 
 
-class _AnonStatsModel(JSONModel):
+class AnonStatsModel(JSONModel):
     """Basic model."""
 
-    class Meta:
+    class Meta:     # pylint: disable=C0115,R0903
         database = DATABASE
         schema = database.database
 
 
-class AnonStats(_AnonStatsModel):
+class AnonStats(AnonStatsModel):
     """Anonymous statistics entry."""
 
     timestamp = DateTimeField(default=datetime.now)
@@ -32,7 +30,7 @@ class AnonStats(_AnonStatsModel):
     url = TextField()
 
 
-class CustomerDomain(_AnonStatsModel):
+class CustomerDomain(AnonStatsModel):
     """Maps domains and customers."""
 
     customer = ForeignKeyField(Customer, column_name='customer')
