@@ -1,11 +1,10 @@
 """WSGI services."""
 
-from datetime import timedelta
+from datetime import date, timedelta
 
 from flask import request
 
 from his import ACCOUNT, CUSTOMER, authenticated, authorized
-from timelib import strpdate
 from wsgilib import Application, JSON
 
 from anonstats.orm import AnonStats, CustomerDomain
@@ -48,15 +47,16 @@ def _get_stats(start, end):
 def list_():
     """Lists statistics for the current customer."""
 
-    try:
-        start = strpdate(request.args.get('start'))
-        end = strpdate(request.args.get('end'))
-    except ValueError:
-        return ('Invalid date.', 400)
+    if (start := request.args.get('start')) is not None:
+        start = date.fromisoformat(start)
+
+    if (end := request.args.get('end')) is not None:
+        end = date.fromisoformat(end)
 
     return JSON([
         anon_stats.to_json(autofields=False)
-        for anon_stats in _get_stats(start, end)])
+        for anon_stats in _get_stats(start, end)
+    ])
 
 
 ROUTES = (('GET', '/', list_, 'list_stats'),)
