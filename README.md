@@ -1,0 +1,2 @@
+# anonstats
+Anonymous website statistics
